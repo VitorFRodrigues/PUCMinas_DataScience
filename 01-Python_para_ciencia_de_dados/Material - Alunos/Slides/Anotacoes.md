@@ -1,6 +1,6 @@
 # Passos para criar máquina virtual
 
-1. Instalar Python na máquina
+1. Instalar Python na máquina (Marcar Add to Path)
  
 2. criar pasta VIRTUALENVS e abrir ela no cmd
 
@@ -35,3 +35,5 @@ pip install ipykernel
 ```
 python -m ipykernel install –-user –-name=pucminas
 ```
+
+https://leandrolessa.com.br/blog/
