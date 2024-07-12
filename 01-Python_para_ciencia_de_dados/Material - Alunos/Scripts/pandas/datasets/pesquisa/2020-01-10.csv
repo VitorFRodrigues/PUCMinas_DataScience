@@ -1,8 +1,3 @@
-cod_pessoa|data_coleta|genero|data_nascimento|animal_estimacao|clima|bebida_favorita|hobbies
-10141521|2020-01-10|Feminino|1984-03-14|gato|frio|Cerveja|Assistir TV
-10141653|2020-01-10|Feminino|1957-11-24|tartaruga|quente|Cerveja|Escrever
-10142206|2020-01-10|Masculino|1997-09-29|cachorro|quente|Cerveja|Aprender algo novo
-10142556|2020-01-10|Masculino|1967-01-11|gato|quente|Água|Ler livros
-10142828|2020-01-10|Masculino|1961-12-12|gato|quente|Café|Aprender algo novo
-10143119|2020-01-10|Feminino|1961-11-13|gato|frio|Café|Assistir TV
-10143472|2020-01-10|Feminino|1979-01-03|peixe|moderado|Vinho|Aprender algo novo
+version https://git-lfs.github.com/spec/v1
+oid sha256:12f2180e3d40e5e27dd905f2ada22dc1caebe0899bebd2da930367648910dbc1
+size 622

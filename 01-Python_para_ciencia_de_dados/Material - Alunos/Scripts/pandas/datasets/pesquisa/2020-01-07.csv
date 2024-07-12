@@ -1,6 +1,3 @@
-cod_pessoa|data_coleta|genero|data_nascimento|animal_estimacao|clima|bebida_favorita|hobbies
-10141745|2020-01-07|Masculino|1982-10-19|cachorro|quente|Cerveja|Dormir
-10141826|2020-01-07|Feminino|1973-01-26|peixe|moderado|refrigerante|Escrever
-10142330|2020-01-07|Masculino|1982-03-16|gato|moderado|refrigerante|Aprender algo novo
-10142711|2020-01-07|Masculino|1960-06-19|cachorro|moderado|Água|Aprender algo novo
-10143397|2020-01-07|Feminino|1972-10-31|peixe|frio|Café|Pintar quadros
+version https://git-lfs.github.com/spec/v1
+oid sha256:4c00346ac88e6fd32dc9cf0494151c8bc1de75d1f3a0044d1feca946027cf86d
+size 489

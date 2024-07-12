@@ -1,0 +1,88 @@
+// Pergunta 01: Usando o database Movie do Neo4j, qual o número de filmes cujo título inicia com "s" e termina com a letra "e"?
+MATCH (m:Movie)
+WHERE m.title STARTS WITH 'S' AND m.title ENDS WITH 'e'
+RETURN count(m) AS numberOfMovies
+
+// Pergunta 02: Usando o database Movie do Neo4j, quantos filmes Lilly Wachowski trabalhou como diretora?
+MATCH (p:Person {name: 'Andy Wachowski'})-[:DIRECTED]->(movie:Movie) RETURN COUNT(movie) AS numberOfMovies
+
+// Pergunta 03: Usando o database Movie do Neo4j, quantos atores atuaram no filme "The Matrix"?
+MATCH (actor:Person)-[:ACTED_IN]->(movie:Movie {title: "The Matrix"})
+RETURN COUNT(actor) AS numberOfActors
+
+// Pergunta 04: Usando o database Movie do Neo4j, considerando uma consulta que retorne o caminho mais curto entre Tom Hanks e Tom Cruise, qual é o ator sem comum entre eles?
+MATCH (tom1:Person {name: "Tom Hanks"}), (tom2:Person {name: "Tom Cruise"})
+OPTIONAL MATCH path = allShortestPaths((tom1)-[:ACTED_IN*]-(tom2))
+WITH path, tom1, tom2
+UNWIND nodes(path) AS n
+WITH DISTINCT n, tom1, tom2
+WHERE n:Person AND n <> tom1 AND n <> tom2
+RETURN collect(n.name) AS commonActors
+
+// Pergunta 05:Usando o database Movie do Neo4j, qual o número de filmes lançados nos entre os anos 2004 e 2010?
+MATCH (m:Movie)
+WHERE m.released >= 2004 AND m.released <= 2010
+RETURN count(m) AS numberOfMovies
+
+// Pergunta 06: Usando o database Movie do Neo4j, quantas pessoas que produziram um filme, mas não dirigiram um filme?
+MATCH (p:Person)-[:PRODUCED]->(:Movie)
+WHERE NOT (p)-[:DIRECTED]->(:Movie)
+RETURN count(p) AS numberOfProducersWhoDidNotDirect
+
+// Pergunta 07: Usando o database Movie do Neo4j, quantos filmes possuem múltiplos diretores?
+MATCH (m:Movie)<-[:DIRECTED]-(d:Person)
+WITH m, count(d) AS directorsCount
+WHERE directorsCount > 1
+RETURN count(m) AS moviesWithMultipleDirectors
+
+// Pergunta 08: Usando o database Movie do Neo4j, qual ator que mais atuou e quantos filmes?
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
+WITH a, count(m) AS moviesCount
+RETURN a.name AS actorName, moviesCount
+ORDER BY moviesCount DESC
+LIMIT 1
+
+// Pergunta 09.1: Usando o database Movie do Neo4j, qual o nome do ator mais novo e mais velho respectivamente?
+// Ator mais novo
+MATCH (a:Person)
+WHERE (a.born is not null)
+RETURN a.name AS actorName, a.born AS birthYear
+ORDER BY a.born DESC
+LIMIT 1
+
+// Pergunta 09.2: Usando o database Movie do Neo4j, qual o nome do ator mais novo e mais velho respectivamente?
+// Ator mais velho
+MATCH (a:Person)
+WHERE (a.born is not null)
+RETURN a.name AS actorName, a.born AS birthYear
+ORDER BY a.born asc
+LIMIT 1
+
+// Pergunta 10: Usando o database Movie do Neo4j, quais diretores dirigiram mais que 5 filmes?
+MATCH (d:Person)-[:DIRECTED]->(m:Movie)
+WITH d, count(m) AS numMovies
+WHERE numMovies >= 5
+RETURN d.name AS directorName, numMovies AS numberOfMovies
+ORDER BY numMovies DESC
+
+// Pergunta 11: Usando o database Movie do Neo4j,  quantos atores atuaram em filmes dirigidos por Chris Columbus?
+MATCH (:Person {name: "Chris Columbus"})-[:DIRECTED]->(m:Movie)<-[:ACTED_IN]-(a:Person)
+RETURN count(DISTINCT a) AS numberOfActors
+
+// Pergunta 12: Usando o database Movie do Neo4j, quantos atores que atuaram no filme Matrix que nasceram depois de 1960?
+MATCH (m:Movie {title: "The Matrix"})<-[:ACTED_IN]-(a:Person)
+WHERE a.born > 1960
+RETURN count(DISTINCT a) AS numberOfActorsBornAfter1960
+
+// Pergunta 13: Usando o database Movie do Neo4j, quanto atores também dirigiram filmes?
+MATCH (p:Person)-[:DIRECTED]->(:Movie)
+WHERE (p)-[:ACTED_IN]->(:Movie)
+RETURN count(DISTINCT p) AS numberOfActorsWhoAlsoDirected
+
+// Pergunta 14: Usando o database Movie do Neo4j, quanto filmes 'Lilly Wachowski' e 'Lana Wachowski' dirigiram juntas?
+MATCH (l1:Person {name: 'Andy Wachowski'})-[:DIRECTED]->(m:Movie)<-[:DIRECTED]-(l2:Person {name: 'Lana Wachowski'})
+RETURN count(DISTINCT m) AS numberOfMoviesDirectedTogether
+
+// Pergunta 15: Usando o database Movie do Neo4j, Quantos filmes Tom Cruise dirigiu?
+MATCH (:Person {name: 'Tom Cruise'})-[:DIRECTED]->(m:Movie)
+RETURN count(m) AS numberOfMoviesDirectedByTomCruise

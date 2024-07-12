@@ -1,0 +1,48 @@
+02-BD_SQL_NoSQL/MongoDB
+02-BD_SQL_NoSQL/Neo4j
+02-BD_SQL_NoSQL/PostgreSQL
+02-BD_SQL_NoSQL/Redis
+
+03-Tec_Amostragem_Mod_regressao/04-Aula 04 - 17-06-24/enem_tratado.csv
+03-Tec_Amostragem_Mod_regressao/05-Aula 05 - 24-06-24/04 - Regressão Binária com Python.ipynb
+03-Tec_Amostragem_Mod_regressao/05-Aula 05 - 24-06-24/covid_doencas_preexistentes.csv
+03-Tec_Amostragem_Mod_regressao/04-Aula 04 - 17-06-24/enem_tratado.csv
+03-Tec_Amostragem_Mod_regressao/05-Aula 05 - 24-06-24/04 - Regressão Binária com Python.ipynb
+03-Tec_Amostragem_Mod_regressao/05-Aula 05 - 24-06-24/covid_doencas_preexistentes.csv
+
+04-Preparacao_e_Integracao_de_Dados/
+# 04-Preparacao_e_Integracao_de_Dados/Execicios/Exercicio 03/DADOS_EXAMES.csv
+# 04-Preparacao_e_Integracao_de_Dados/Terraform
+# 04-Preparacao_e_Integracao_de_Dados/Terraform_aula
+# 04-Preparacao_e_Integracao_de_Dados/Terraform/terraform.exe
+
+.git\objects\38\114557d24987f5f20b577aba874d97f82d7962
+.git\objects\55\6695ae48ceb8d5b4128dc69a67ff805e7ed9ff
+.git\objects\ab\457ecd0528e1cf9b9adabbb2bbbcbf14b0e947
+.git\objects\b2\0899f0624f0163bc9dd7d2fc449e19d35e8218
+.git\objects\d9\bf1808517b63a64483abbe2ea29a9a185a164c
+.git\objects\f0\a01f42999e1296980f558da41af8ff0f118531
+
+# Ignorar arquivos .exe e .csv
+*.exe
+
+# Ignorar arquivos do Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+
+# Ignorar arquivos de configuração do editor
+.vscode/
+.idea/
+*.swp
+
+# Ignorar logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+*.old
+
+# Ignorar arquivos de build
+build/
+dist/
+*.egg-info/
