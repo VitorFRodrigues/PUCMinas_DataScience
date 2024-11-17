@@ -24,8 +24,10 @@ st.markdown(
 
 # Função para avaliação
 def avaliar_mau(dict_respostas):
-        # Verificar e descompactar o modelo, se necessário
-    zip_path = 'Objeto/modelo_RandomForest.zip'
+    # Verificar e descompactar o modelo, se necessário
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))  # Diretório do script atual
+    zip_path = os.path.join(base_dir, 'Objeto', 'modelo_RandomForest.zip')
     output_dir = 'Objeto/'
     model_path = os.path.join(output_dir, 'modelo_RandomForest.joblib')
 
@@ -34,11 +36,9 @@ def avaliar_mau(dict_respostas):
 
     # Carregar o modelo e as features
     modelo = load(model_path)
-    features = load('Objeto/features.joblib')
-
-
-    # modelo = load('Objeto/modelo_RandomForest.joblib')
-    features = load('Objeto/features.joblib')
+    base_dir = os.path.dirname(os.path.abspath(__file__))  # Diretório do script atual
+    features_path = os.path.join(base_dir, 'Objeto', 'features.joblib')
+    features = load(features_path)
 
     if dict_respostas['ANOS_DESEMPREGADO'] > 0:
         dict_respostas['ANOS_EMPREGADO'] = dict_respostas['ANOS_DESEMPREGADO'] * -1 
@@ -52,7 +52,9 @@ def avaliar_mau(dict_respostas):
     return mau
 
 # Exibição do logotipo e título
-st.image('https://github.com/VitorFRodrigues/PUCMinas_DataScience/blob/main/06-Machine_Learning/Tarefas/Modulo_A/img/bytebank_logo.png')
+base_dir = os.path.dirname(os.path.abspath(__file__))  # Diretório do script atual
+imagem_path = os.path.join(base_dir, 'img', 'bytebank_logo.png')
+st.image(imagem_path)
 st.title("Simulador de Avaliação de Crédito")
 
 # Expansores para categorias
@@ -62,7 +64,11 @@ my_expander_3 = st.expander("Família")
 
 # Dicionário para respostas
 dict_respostas = {}
-lista_campos = load('Objeto/lista_campos.joblib')
+
+# Obter o caminho absoluto para o arquivo
+base_dir = os.path.dirname(os.path.abspath(__file__))  # Diretório do script atual
+lista_campos_path = os.path.join(base_dir, 'Objeto', 'lista_campos.joblib')
+lista_campos = load(lista_campos_path)
 
 # Expansor 1: Trabalho
 with my_expander_1:
@@ -147,7 +153,3 @@ if st.button('Avaliar crédito'):
         st.error('Crédito negado')
     else:
         st.success('Crédito aprovado')
-
-
-
-
