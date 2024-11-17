@@ -38,7 +38,7 @@ def avaliar_mau(dict_respostas):
 
 
     # modelo = load('Objeto/modelo_RandomForest.joblib')
-    features = load('Objeto/features.joblib')
+    features = load('https://github.com/VitorFRodrigues/PUCMinas_DataScience/blob/main/06-Machine_Learning/Tarefas/Modulo_A/Objeto/features.joblib')
 
     if dict_respostas['ANOS_DESEMPREGADO'] > 0:
         dict_respostas['ANOS_EMPREGADO'] = dict_respostas['ANOS_DESEMPREGADO'] * -1 
@@ -62,7 +62,7 @@ my_expander_3 = st.expander("Família")
 
 # Dicionário para respostas
 dict_respostas = {}
-lista_campos = load(r'Objeto/lista_campos.joblib')
+lista_campos = load('https://github.com/VitorFRodrigues/PUCMinas_DataScience/blob/main/06-Machine_Learning/Tarefas/Modulo_A/Objeto/lista_campos.joblib')
 
 # Expansor 1: Trabalho
 with my_expander_1:
