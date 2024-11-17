@@ -52,7 +52,7 @@ def avaliar_mau(dict_respostas):
     return mau
 
 # Exibição do logotipo e título
-st.image('img/bytebank_logo.png')
+#st.image('img/bytebank_logo.png')
 st.title("Simulador de Avaliação de Crédito")
 
 # Expansores para categorias
