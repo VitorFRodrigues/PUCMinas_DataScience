@@ -62,7 +62,7 @@ my_expander_3 = st.expander("Família")
 
 # Dicionário para respostas
 dict_respostas = {}
-lista_campos = load('https://github.com/VitorFRodrigues/PUCMinas_DataScience/blob/main/06-Machine_Learning/Tarefas/Modulo_A/Objeto/lista_campos.joblib')
+lista_campos = load('https://github.com/VitorFRodrigues/PUCMinas_DataScience/raw/refs/heads/main/06-Machine_Learning/Tarefas/Modulo_A/Objeto/lista_campos.joblib')
 
 # Expansor 1: Trabalho
 with my_expander_1:
