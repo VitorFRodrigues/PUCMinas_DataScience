@@ -2,43 +2,19 @@ import streamlit as st
 from joblib import load
 import pandas as pd
 from utils import Transformador
+import zipfile
+import os
 
-##########################################################################
-# Download de Objetos: Modelos costumam ser muito grandes para permanecer no github.
-import requests
-from joblib import load
-from io import BytesIO
+def descompactar_modelo(zip_path, output_dir):
+    """
+    Função para descompactar o arquivo .zip contendo o modelo.
+    """
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
-# Link compartilhado do OneDrive
-onedrive_url = "https://1drv.ms/u/s!Ag9v3Du8Ydbojtk2qojwhL6y48jrDQ?e=LbWyWI"
-
-# Função para ajustar o link do OneDrive para download direto
-def ajustar_link_onedrive(url):
-    # Transformar o link de compartilhamento em link de download
-    if "1drv.ms" in url:
-        response = requests.get(url, allow_redirects=False)
-        if "Location" in response.headers:
-            return response.headers["Location"]
-    return url
-
-# Função para baixar o modelo e carregá-lo diretamente na memória
-def carregar_modelo_from_onedrive(url):
-    # Ajustar o link para download direto
-    download_url = ajustar_link_onedrive(url)
-    
-    # Fazer o download do arquivo
-    response = requests.get(download_url, stream=True)
-    if response.status_code == 200:
-        # Carregar o conteúdo do arquivo diretamente na memória
-        file_like_object = BytesIO(response.content)
-        model = load(file_like_object)  # Carregar o modelo diretamente da memória
-        print("Modelo carregado com sucesso da memória")
-        return model
-    else:
-        print(f"Erro ao baixar o modelo: {response.status_code}")
-        return None
-
-########################################################################## 
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        zip_ref.extractall(output_dir)
+    print(f"Modelo descompactado em: {output_dir}")
 
 # Definir estilo para o listbox
 st.markdown(
@@ -48,9 +24,20 @@ st.markdown(
 
 # Função para avaliação
 def avaliar_mau(dict_respostas):
-    # print(carregar_modelo_from_onedrive(onedrive_url))
-    # modelo = carregar_modelo_from_onedrive(onedrive_url)
-    modelo = load('Objeto/modelo_RandomForest.joblib')
+        # Verificar e descompactar o modelo, se necessário
+    zip_path = 'Objeto/modelo_RandomForest.zip'
+    output_dir = 'Objeto/'
+    model_path = os.path.join(output_dir, 'modelo_RandomForest.joblib')
+
+    if not os.path.exists(model_path):
+        descompactar_modelo(zip_path, output_dir)
+
+    # Carregar o modelo e as features
+    modelo = load(model_path)
+    features = load('Objeto/features.joblib')
+
+
+    # modelo = load('Objeto/modelo_RandomForest.joblib')
     features = load('Objeto/features.joblib')
 
     if dict_respostas['ANOS_DESEMPREGADO'] > 0:
@@ -160,6 +147,7 @@ if st.button('Avaliar crédito'):
         st.error('Crédito negado')
     else:
         st.success('Crédito aprovado')
+
 
 
 
